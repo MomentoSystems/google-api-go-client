@@ -323,7 +323,7 @@ func (s *AddChartResponse) MarshalJSON() ([]byte, error) {
 // at the given index. All subsequent rules' indexes are incremented.
 type AddConditionalFormatRuleRequest struct {
 	// Index: The zero-based index where the rule should be inserted.
-	Index int64 `json:"index,omitempty"`
+	Index uint64 `json:"index,omitempty"`
 
 	// Rule: The rule to add.
 	Rule *ConditionalFormatRule `json:"rule,omitempty"`
@@ -798,8 +798,8 @@ type AppendCellsRequest struct {
 	// Rows: The data to append.
 	Rows []*RowData `json:"rows,omitempty"`
 
-	// SheetId: The sheet ID to append the data to.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet ID to append the data to. Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "Fields") to
 	// unconditionally include in API requests. By default, fields with
@@ -838,8 +838,8 @@ type AppendDimensionRequest struct {
 	// Length: The number of rows or columns to append.
 	Length int64 `json:"length,omitempty"`
 
-	// SheetId: The sheet to append rows or columns to.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet to append rows or columns to.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "Dimension") to
 	// unconditionally include in API requests. By default, fields with
@@ -3518,8 +3518,8 @@ func (s *ChartSpec) MarshalJSON() ([]byte, error) {
 // ClearBasicFilterRequest: Clears the basic filter, if any exists on
 // the sheet.
 type ClearBasicFilterRequest struct {
-	// SheetId: The sheet ID on which the basic filter should be cleared.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet ID on which the basic filter should be cleared.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "SheetId") to
 	// unconditionally include in API requests. By default, fields with
@@ -4288,7 +4288,8 @@ type DataSource struct {
 	// field cannot be changed once set. When creating a data source, an
 	// associated DATA_SOURCE sheet is also created, if the field is not
 	// specified, the ID of the created sheet will be randomly generated.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// Spec: The DataSourceSpec for the data source connected with this
 	// spreadsheet.
@@ -4728,8 +4729,8 @@ type DataSourceSheetDimensionRange struct {
 	// ColumnReferences: The columns on the data source sheet.
 	ColumnReferences []*DataSourceColumnReference `json:"columnReferences,omitempty"`
 
-	// SheetId: The ID of the data source sheet the range is on.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The ID of the data source sheet the range is on.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "ColumnReferences") to
 	// unconditionally include in API requests. By default, fields with
@@ -5031,8 +5032,8 @@ type DeleteConditionalFormatRuleRequest struct {
 	// Index: The zero-based index of the rule to be deleted.
 	Index int64 `json:"index,omitempty"`
 
-	// SheetId: The sheet the rule is being deleted from.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet the rule is being deleted from.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "Index") to
 	// unconditionally include in API requests. By default, fields with
@@ -5500,8 +5501,8 @@ func (s *DeleteRangeRequest) MarshalJSON() ([]byte, error) {
 // DeleteSheetRequest: Deletes the requested sheet.
 type DeleteSheetRequest struct {
 	// SheetId: The ID of the sheet to delete. If the sheet is of
-	// DATA_SOURCE type, the associated DataSource is also deleted.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// DATA_SOURCE type, the associated DataSource is also deleted.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "SheetId") to
 	// unconditionally include in API requests. By default, fields with
@@ -5613,8 +5614,8 @@ type DeveloperMetadataLocation struct {
 	LocationType string `json:"locationType,omitempty"`
 
 	// SheetId: The ID of the sheet when metadata is associated with an
-	// entire sheet.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// entire sheet.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// Spreadsheet: True when metadata is associated with an entire
 	// spreadsheet.
@@ -5862,8 +5863,8 @@ type DimensionRange struct {
 	// EndIndex: The end (exclusive) of the span, or not set if unbounded.
 	EndIndex int64 `json:"endIndex,omitempty"`
 
-	// SheetId: The sheet this span is on.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet this span is on.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// StartIndex: The start (inclusive) of the span, or not set if
 	// unbounded.
@@ -5958,7 +5959,7 @@ type DuplicateSheetRequest struct {
 	// NewSheetId: If set, the ID of the new sheet. If not set, an ID is
 	// chosen. If set, the ID must not conflict with any existing sheet ID.
 	// If set, it must be non-negative.
-	NewSheetId int64 `json:"newSheetId,omitempty"`
+	NewSheetId uint64 `json:"newSheetId,omitempty"`
 
 	// NewSheetName: The name of the new sheet. If empty, a new name is
 	// chosen for you.
@@ -6144,7 +6145,7 @@ type EmbeddedObjectPosition struct {
 
 	// SheetId: The sheet this is on. Set only if the embedded object is on
 	// its own sheet. Must be non-negative.
-	SheetId int64 `json:"sheetId,omitempty"`
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "NewSheet") to
 	// unconditionally include in API requests. By default, fields with
@@ -6454,8 +6455,8 @@ type FindReplaceRequest struct {
 	// "GSheets Rocks" and "GDocs Rocks" respectively.
 	SearchByRegex bool `json:"searchByRegex,omitempty"`
 
-	// SheetId: The sheet to find/replace over.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet to find/replace over.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "AllSheets") to
 	// unconditionally include in API requests. By default, fields with
@@ -6603,8 +6604,8 @@ type GridCoordinate struct {
 	// RowIndex: The row index of the coordinate.
 	RowIndex int64 `json:"rowIndex,omitempty"`
 
-	// SheetId: The sheet this coordinate is on.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet this coordinate is on.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "ColumnIndex") to
 	// unconditionally include in API requests. By default, fields with
@@ -6746,8 +6747,8 @@ type GridRange struct {
 	// unbounded.
 	EndRowIndex int64 `json:"endRowIndex,omitempty"`
 
-	// SheetId: The sheet this range is on.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// SheetId: The sheet this range is on.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// StartColumnIndex: The start column (inclusive) of the range, or not
 	// set if unbounded.
@@ -9369,7 +9370,7 @@ type SheetProperties struct {
 
 	// SheetId: The ID of the sheet. Must be non-negative. This field cannot
 	// be changed once set.
-	SheetId int64 `json:"sheetId,omitempty"`
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// SheetType: The type of sheet. Defaults to GRID. This field cannot be
 	// changed once set.
@@ -10570,8 +10571,8 @@ type UpdateConditionalFormatRuleRequest struct {
 	Rule *ConditionalFormatRule `json:"rule,omitempty"`
 
 	// SheetId: The sheet of the rule to move. Required if new_index is set,
-	// unused otherwise.
-	SheetId int64 `json:"sheetId,omitempty"`
+	// unused otherwise.Must be non-negative
+	SheetId uint64 `json:"sheetId,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "Index") to
 	// unconditionally include in API requests. By default, fields with
